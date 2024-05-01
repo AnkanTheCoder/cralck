@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Server Options</title>
+    <style>
+        :root {
+            --bg-color: #f0f0f0;
+            --text-color: #333;
+            --container-bg: #fff;
+            --border-color: #ccc;
+            --button-bg: #4caf50;
+            --button-bg-hover: #45a049;
+        }
+        [data-theme="dark"] {
+            --bg-color: #333;
+            --text-color: #f0f0f0;
+            --container-bg: #424242;
+            --border-color: #888;
+            --button-bg: #388e3c;
+            --button-bg-hover: #2e7d32;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            text-align: center;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: var(--container-bg);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+        h1 {
+            color: inherit;
+        }
+        .option {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .option label {
+            font-size: 18px;
+            margin-right: 10px;
+            min-width: 200px;
+            text-align: right;
+            color: inherit;
+        }
+        .option select, .option input[type="number"], .option input[type="checkbox"], .option input[type="url"] {
+            font-size: 16px;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            background-color: var(--container-bg);
+            color: var(--text-color);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .option button {
+            font-size: 16px;
+            padding: 8px 20px;
+            border-radius: 5px;
+            background-color: var(--button-bg);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .option button:hover {
+            background-color: var(--button-bg-hover);
+        }
+        .theme-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .theme-switcher input[type="checkbox"] {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <div class="theme-switcher">
+        <input type="checkbox" id="theme-toggle">
+        <label for="theme-toggle">Dark Mode</label>
+    </div>
+    <div class="container">
+        <h1>Minecraft Server Options</h1>
+<style>
+        /* Basic styling for the navbar */
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        /* Navbar links styling */
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        /* Change color on hover */
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+    </style>
+<div class="navbar">
+        <a href="options.html">Options</a>
+        <a href="console.html">Console</a>
+        <a href="players.html">Players</a>
+        <a href="worlds.html">Worlds</a>
+        <a href="access.html">Access</a>
+    </div>
+       
+<div class="option">
+    <label for="slots">Slots:</label>
+    <input type="number" id="slots" min="2" max="100" value="10">
+</div>
+<div class="option">
+    <label for="gamemode">Game Mode:</label>
+    <select id="gamemode">
+        <option value="survival">Survival</option>
+        <option value="creative">Creative</option>
+        <option value="adventure">Adventure</option>
+        <option value="spectator">Spectator</option>
+    </select>
+</div>
+<div class="option">
+    <label for="difficulty">Difficulty:</label>
+    <select id="difficulty">
+        <option value="peaceful">Peaceful</option>
+        <option value="easy">Easy</option>
+        <option value="normal">Normal</option>
+        <option value="hard">Hard</option>
+    </select>
+</div>
+<div class="option">
+    <label for="whitelist">Whitelist:</label>
+    <select id="whitelist">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+    </select>
+</div>
+<div class="option">
+    <label for="cracked">Cracked:</label>
+    <select id="cracked">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+    </select>
+</div>
+<div class="option">
+    <label for="pvp">PvP:</label>
+    <select id="pvp">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+    </select>
+</div>
+<div class="option">
+    <label for="commandblocks">Command Blocks:</label>
+    <select id="commandblocks">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+    </select>
+</div>
+<div class="option">
+    <label for="fly">Fly:</label>
+    <select id="fly">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+    </select>
+</div>
+<div class="option">
+    <label for="animals">Animals:</label>
+    <select id="animals">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+    </select>
+</div>
+<div class="option">
+    <label for="monsters">Monsters:</label>
+    <select id="monsters">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+    </select>
+</div>
+<div class="option">
+    <label for="villagers">Villagers:</label>
+    <select id="villagers">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+    </select>
+</div>
+<div class="option">
+    <label for="forcegamemode">Force Gamemode:</label>
+    <select id="forcegamemode">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+    </select>
+</div>
+<div class="option">
+    <label for="spawnprotection">Spawn Protection:</label>
+    <input type="number" id="spawnprotection" min="0" max="100" value="16">
+</div>
+<div class="option">
+    <label for="resourcepackrequired">Resource Pack Required:</label>
+    <select id="resourcepackrequired">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+    </select>
+</div>
+<div class="option">
+    <label for="resourcepacklink">Resource Pack Link:</label>
+    <input type="url" id="resourcepacklink" placeholder="https://www.example.com/resource-pack.zip">
+</div>
+<div class="option">
+    <button id="applyBtn">Apply Options</button>
+</div>
+
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('change', function() {
+            if (this.checked) {
+                document.body.setAttribute('data-theme', 'dark');
+            } else {
+                document.body.setAttribute('data-theme', 'light');
+            }
+        });
+
+        function saveOptions() {
+            localStorage.setItem('minecraft_options', JSON.stringify({
+                slots: document.getElementById('slots').value,
+                gamemode: document.getElementById('gamemode').value,
+                difficulty: document.getElementById('difficulty').value,
+                whitelist: document.getElementById('whitelist').value,
+                cracked: document.getElementById('cracked').value,
+                pvp: document.getElementById('pvp').value,
+                commandblocks: document.getElementById('commandblocks').value,
+                fly: document.getElementById('fly').value,
+                animals: document.getElementById('animals').value,
+                monsters: document.getElementById('monsters').value,
+                villagers: document.getElementById('villagers').value,
+                forcegamemode: document.getElementById('forcegamemode').value,
+                spawnprotection: document.getElementById('spawnprotection').value,
+                resourcepackrequired: document.getElementById('resourcepackrequired').value,
+                resourcepacklink: document.getElementById('resourcepacklink').value
+            }));
+        }
+
+        function loadOptions() {
+            const options = JSON.parse(localStorage.getItem('minecraft_options'));
+            if (options) {
+                document.getElementById('slots').value = options.slots;
+                document.getElementById('gamemode').value = options.gamemode;
+                document.getElementById('difficulty').value = options.difficulty;
+                document.getElementById('whitelist').value = options.whitelist;
+                document.getElementById('cracked').value = options.cracked;
+                document.getElementById('pvp').value = options.pvp;
+                document.getElementById('commandblocks').value = options.commandblocks;
+                document.getElementById('fly').value = options.fly;
+                document.getElementById('animals').value = options.animals;
+                document.getElementById('monsters').value = options.monsters;
+                document.getElementById('villagers').value = options.villagers;
+                document.getElementById('forcegamemode').value = options.forcegamemode;
+                document.getElementById('spawnprotection').value = options.spawnprotection;
+                document.getElementById('resourcepackrequired').value = options.resourcepackrequired;
+                document.getElementById('resourcepacklink').value = options.resourcepacklink;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadOptions);
+        document.getElementById('applyBtn').addEventListener('click', function() {
+            saveOptions();
+            alert('Options saved!');
+        });
+    </script>
+</body>
+</html>

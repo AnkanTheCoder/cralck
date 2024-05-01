@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Page with Enhanced Features</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        input, button {
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            width: calc(100% - 22px);
+        }
+        button {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            padding: 5px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .button-small {
+            padding: 5px 10px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+<style>
+        /* Basic styling for the navbar */
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        /* Navbar links styling */
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        /* Change color on hover */
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+    </style>
+<div class="navbar">
+        <a href="options.html">Options</a>
+        <a href="console.html">Console</a>
+        <a href="players.html">Players</a>
+        <a href="worlds.html">Worlds</a>
+        <a href="access.html">Access</a>
+    </div>
+        <h1>Access Form</h1>
+        <input type="text" id="nameInput" placeholder="Enter someone's name">
+        <button onclick="grantAccess()">Submit</button>
+        <p id="accessMessage"></p>
+        <h2>Accessed Persons</h2>
+        <ul id="accessList"></ul>
+    </div>
+
+    <script>
+        function grantAccess() {
+            var name = document.getElementById('nameInput').value;
+            var message = "Access granted for " + name + "!";
+            document.getElementById('accessMessage').textContent = message;
+
+            // Save to local storage
+            saveToLocalStorage(name);
+
+            // Update list
+            updateList();
+        }
+
+        function saveToLocalStorage(name) {
+            let accessedNames = JSON.parse(localStorage.getItem('accessedNames')) || [];
+            accessedNames.push({name: name, pinned: false});
+            localStorage.setItem('accessedNames', JSON.stringify(accessedNames));
+        }
+
+        function updateList() {
+            let accessedNames = JSON.parse(localStorage.getItem('accessedNames')) || [];
+            let list = document.getElementById('accessList');
+            list.innerHTML = '';
+            accessedNames.sort((a, b) => b.pinned - a.pinned).forEach(function(item, index) {
+                let li = document.createElement('li');
+                li.textContent = item.name;
+                let deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.className = 'button-small';
+                deleteButton.onclick = function() { deleteName(index); };
+                let pinButton = document.createElement('button');
+                pinButton.textContent = item.pinned ? 'Unpin' : 'Pin';
+                pinButton.className = 'button-small';
+                pinButton.onclick = function() { togglePin(index); };
+                li.appendChild(deleteButton);
+                li.appendChild(pinButton);
+                list.appendChild(li);
+            });
+        }
+
+        function deleteName(index) {
+            let accessedNames = JSON.parse(localStorage.getItem('accessedNames')) || [];
+            accessedNames.splice(index, 1);
+            localStorage.setItem('accessedNames', JSON.stringify(accessedNames));
+            updateList();
+        }
+
+        function togglePin(index) {
+            let accessedNames = JSON.parse(localStorage.getItem('accessedNames')) || [];
+            accessedNames[index].pinned = !accessedNames[index].pinned;
+            localStorage.setItem('accessedNames', JSON.stringify(accessedNames));
+            updateList();
+        }
+
+        // On page load, update the list
+        document.addEventListener('DOMContentLoaded', updateList);
+    </script>
+</body>
+</html>

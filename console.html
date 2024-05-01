@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Console</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        .console {
+            flex: 1;
+            background-color: #000;
+            color: #0f0;
+            padding: 10px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            font-family: 'Consolas', 'Courier New', monospace;
+        }
+        .input-area {
+            display: flex;
+        }
+        .input-area input {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            background-color: #fff;
+            color: #333;
+        }
+        .input-area button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <header>Server Console</header>
+    <div class="console" id="console">
+        <!-- Server output will be displayed here -->
+    </div>
+    <div class="input-area">
+        <input type="text" id="commandInput" placeholder="Enter command" onkeypress="handleKeyPress(event)">
+        <button onclick="sendCommand()">Send</button>
+    </div>
+
+    <script>
+        const consoleDiv = document.getElementById('console');
+        const commandInput = document.getElementById('commandInput');
+
+        function sendCommand() {
+            const command = commandInput.value.trim();
+            if (command === '') return; // Avoid processing empty commands
+            if (command.toLowerCase().startsWith("ty com * ")) {
+                deleteMessage(command);
+            } else if (command.toLowerCase().startsWith("clear output")) {
+                clearConsole();
+            } else if (command.toLowerCase().startsWith("edish mast * ")) {
+                editMessage(command);
+            } else {
+                displayCommand(`> ${command}`);
+            }
+            commandInput.value = ''; // Clear input after sending
+            saveConsoleHistory();
+        }
+
+        function displayCommand(command) {
+            consoleDiv.innerHTML += `${command}\n`;
+            consoleDiv.scrollTop = consoleDiv.scrollHeight; // Auto-scroll to the latest output
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendCommand();
+            }
+        }
+
+        function saveConsoleHistory() {
+            localStorage.setItem('consoleHistory', consoleDiv.innerHTML);
+        }
+
+        function loadConsoleHistory() {
+            const savedHistory = localStorage.getItem('consoleHistory');
+            if (savedHistory) {
+                consoleDiv.innerHTML = savedHistory;
+                consoleDiv.scrollTop = consoleDiv.scrollHeight; // Scroll to the bottom on load
+            }
+        }
+
+        function deleteMessage(command) {
+            const messageToDelete = command.substring("ty com * ".length).trim();
+            const pattern = `> ${messageToDelete}\n`;
+            const index = consoleDiv.innerHTML.indexOf(pattern);
+            if (index !== -1) {
+                consoleDiv.innerHTML = consoleDiv.innerHTML.replace(pattern, '');
+                saveConsoleHistory();
+            }
+        }
+
+        function clearConsole() {
+            consoleDiv.innerHTML = '';
+            saveConsoleHistory();
+        }
+
+        function editMessage(command) {
+            const parts = command.split(" change * ");
+            if (parts.length < 2) return;
+            const original = parts[0].substring("edish mast * ".length);
+            const replacement = parts[1];
+            const escapedOriginal = original.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const regex = new RegExp(`> ${escapedOriginal}`, "g");
+            if (consoleDiv.innerHTML.includes(`> ${original}`)) {
+                consoleDiv.innerHTML = consoleDiv.innerHTML.replace(regex, `> ${replacement}`);
+                saveConsoleHistory();
+            }
+        }
+
+        window.onload = function() {
+            loadConsoleHistory(); // Load history when the page loads
+        };
+    </script>
+</body>
+</html>
